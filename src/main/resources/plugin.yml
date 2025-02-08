@@ -1,0 +1,7 @@
+name: Rankup
+version: '1.0'
+main: me.rama.Rankup
+api-version: '1.21'
+load: STARTUP
+authors: [ ImRama ]
+description: Rankup system for Minecraft servers.

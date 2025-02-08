@@ -1,0 +1,13 @@
+config:
+  database:
+
+  ranks:
+    0: #Default rank
+      id:
+      permission: rank.default
+      requirements:
+        1:
+        2:
+        3:
+    1:
+    2:
