@@ -1,13 +1,21 @@
-config:
+settings:
+
+  debug-mode: true
   database:
 
-  ranks:
-    0: #Default rank
-      id:
-      permission: rank.default
-      requirements:
-        1:
-        2:
-        3:
-    1:
-    2:
+ranks:
+  0: #Default rank
+    id:
+    permission: rank.default
+    requirements:
+      1:
+        type: placeholder
+        variable: ""
+        return: integer
+        requirement: ">=;2000" #<, <=, >, >=
+    up_commands:
+      - "CONSOLE;lp user $player parent add vip"
+    down_commands:
+      - "CONSOLE;lp user"
+  1:
+  2:
