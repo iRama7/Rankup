@@ -1,11 +1,18 @@
 settings:
 
   debug-mode: true
-  database:
+  broadcast_rank_message: true
+
+lang:
+  error_message: "&cAn error has occurred, please contact the administrators."
+  rankup_fail: "&cCould not rankup, you are missing the requirements."
+  rankup_success: "You have ranked up to rank $rank successfully."
+  rankup_broadcast: "Player %player% ranked up to rank %rank% successfully."
+  last_rankup: "You are already at the last rank!"
 
 ranks:
   0: #Default rank
-    id:
+    display: ""
     permission: rank.default
     requirements:
       1:

@@ -1,7 +1,9 @@
 package me.rama.config;
 
 import me.rama.Rankup;
+import me.rama.ranks.Rank;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Set;
@@ -35,8 +37,8 @@ public class Config {
         return config.getConfigurationSection("ranks").getKeys(false);
     }
 
-    public String getID(String rank){
-        return config.getString("ranks." + rank + ".id");
+    public String getDisplay(String rank){
+        return config.getString("ranks." + rank + ".display");
     }
 
     public String getPermission(String rank){
@@ -67,4 +69,23 @@ public class Config {
         return config.getString("ranks." + rank + ".requirements." + requirement + ".requirement");
     }
 
+    public String getErrorMessage(){
+        return config.getString("lang.error_message");
+    }
+
+    public String getRankupFailMessage(){
+        return config.getString("lang.rankup_fail");
+    }
+
+    public String getRankupSuccessMessage(Rank rank){
+        return config.getString("lang.rankup_success").replaceAll("%rank%", rank.getDisplay());
+    }
+
+    public String getRankupBroadcastMessage(Player player, Rank rank){
+        return config.getString("lang.rankup_broadcast").replaceAll("%rank%", rank.getDisplay()).replaceAll("%player%", player.getName());
+    }
+
+    public String getLastRankMessage() {
+        return config.getString("lang.last_rankup");
+    }
 }
