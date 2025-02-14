@@ -2,7 +2,6 @@ package me.rama.ranks.requirements;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.rama.Rankup;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class PlaceholderRequirement extends Requirement{
@@ -14,7 +13,6 @@ public class PlaceholderRequirement extends Requirement{
     @Override
     public boolean eval(Player player) {
         String translatedVariable = PlaceholderAPI.setPlaceholders(player, variable);
-        Bukkit.getLogger().info(translatedVariable + " " + variable);
 
         switch (return_type){
             case "integer":
@@ -27,8 +25,6 @@ public class PlaceholderRequirement extends Requirement{
 
                     String operator = split[0];
                     int value = Integer.parseInt(split[1]);
-
-                    main.log(variableInt + " " + operator + " " + value, true);
 
                     return switch (operator) {
                         case "<" -> variableInt < value;

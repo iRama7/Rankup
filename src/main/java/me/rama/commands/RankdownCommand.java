@@ -22,17 +22,48 @@ public class RankdownCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] args) {
 
         if(args.length == 0 && sender instanceof Player player){
-            Rank player_rank = null;
+
+            if(!player.hasPermission(main.getSettings().getRankDownPermission())){
+                return false;
+            }
+
+            Rank player_rank;
+
             try {
                 player_rank = main.getDatabase().getRank(player);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
 
-            if(!player_rank.isDefault()){
-                player_rank.rankdown(player);
+            //if player rank is not first or null
+
+            if(player_rank != null && !player_rank.isDefault()){
+
+                //Rank down possible
+                Rank prev_rank;
+                try {
+                    prev_rank = main.getPrevRank(player);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                //Execute rank down if not null
+                if(prev_rank != null){
+                    prev_rank.rankdown(player);
+
+                    try {
+                        main.getDatabase().updatePlayer(player, prev_rank); //Update database
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    player.sendMessage(main.colorized(main.getSettings().getRankDownSuccess(prev_rank)));
+                }else{
+                    player.sendMessage(main.colorized(main.getSettings().getErrorMessage()));
+                }
+
             }else{
-                //send message
+                player.sendMessage(main.colorized(main.getSettings().getRankDownError()));
             }
 
         }

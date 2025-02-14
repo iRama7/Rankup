@@ -10,7 +10,6 @@ public class Rank {
 
     private final int index;
     private final String display;
-    private final String permission;
     private final List<Requirement> requirements;
     private final List<Command> up_commands;
     private final List<Command> down_commands;
@@ -20,7 +19,6 @@ public class Rank {
     public Rank(int index, String display, String permission, List<Requirement> requirements, List<Command> upCommands, List<Command> downCommands, Rankup main) {
         this.index = index;
         this.display = display;
-        this.permission = permission;
         this.requirements = requirements;
         this.main = main;
         up_commands = upCommands;
@@ -45,6 +43,7 @@ public class Rank {
         for(Command command : up_commands){
             command.execute(player);
         }
+
 
     }
 

@@ -17,7 +17,7 @@ public class Listener implements org.bukkit.event.Listener {
     public void playerJoinEvent(PlayerJoinEvent e) throws SQLException {
 
         if(main.getDatabase().getRank(e.getPlayer()) == null){
-            main.getDatabase().updatePlayer(e.getPlayer(), main.getRank(0));
+            main.getDatabase().addPlayer(e.getPlayer(), main.getRank(0));
             if(main.getSettings().getDebugMode()){
                 main.log("&eAdding default rank to new player &f" + e.getPlayer().getName(), true);
             }

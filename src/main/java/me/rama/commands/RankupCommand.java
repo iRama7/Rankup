@@ -4,11 +4,9 @@ import me.rama.Rankup;
 import me.rama.ranks.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,6 +26,10 @@ public class RankupCommand implements TabExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] args) {
 
         if(args.length == 0 && sender instanceof Player player){
+
+            if(!player.hasPermission(main.getSettings().getRankupPermission())){
+                return false;
+            }
 
             Rank player_rank;
             Rank next_rank;
@@ -54,7 +56,19 @@ public class RankupCommand implements TabExecutor {
                     if (eval) {
                         next_rank.rankup(player);
 
+                        try {
+                            main.getDatabase().updatePlayer(player, next_rank);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
                         player.sendMessage(main.colorized(main.getSettings().getRankupSuccessMessage(next_rank)));
+
+                        if(main.getSettings().broadcastRankMessage()){
+                            for(Player p : Bukkit.getOnlinePlayers()){
+                                p.sendMessage(main.colorized(main.getSettings().getRankupBroadcastMessage(player, next_rank)));
+                            }
+                        }
 
                     } else {
                         player.sendMessage(main.colorized(main.getSettings().getRankupFailMessage()));
@@ -68,7 +82,8 @@ public class RankupCommand implements TabExecutor {
 
         if(args.length == 1 && args[0].equals("reload")){
 
-
+            main.reload();
+            sender.sendMessage("Reloaded.");
 
         }
 

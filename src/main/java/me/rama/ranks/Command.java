@@ -27,9 +27,9 @@ public class Command {
     public void execute(Player p){
 
         if(executor.equals(Executor.CONSOLE)){
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replaceAll("%player%", p.getName()));
         }else if(executor.equals(Executor.PLAYER)){
-            Bukkit.dispatchCommand(p, command);
+            Bukkit.dispatchCommand(p, command.replaceAll("%player%", p.getName()));
         }
 
     }

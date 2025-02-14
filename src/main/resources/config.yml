@@ -2,13 +2,18 @@ settings:
 
   debug-mode: true
   broadcast_rank_message: true
+  permissions:
+    rankup: command.rankup
+    rankdown: command.rankdown
 
 lang:
   error_message: "&cAn error has occurred, please contact the administrators."
   rankup_fail: "&cCould not rankup, you are missing the requirements."
-  rankup_success: "You have ranked up to rank $rank successfully."
-  rankup_broadcast: "Player %player% ranked up to rank %rank% successfully."
-  last_rankup: "You are already at the last rank!"
+  rankup_success: "&aYou have ranked up to rank &r%rank% &asuccessfully."
+  rankup_broadcast: "&ePlayer &f%player% &eranked up to rank &f%rank% &esuccessfully."
+  last_rankup: "&eYou are already at the last rank!"
+  rankdown_error: "&cYou can't rankdown anymore!"
+  rankdown_success: "&eYou have ranked down to rank &r%rank% &asuccessfully."
 
 ranks:
   0: #Default rank

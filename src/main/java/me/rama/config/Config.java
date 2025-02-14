@@ -81,11 +81,31 @@ public class Config {
         return config.getString("lang.rankup_success").replaceAll("%rank%", rank.getDisplay());
     }
 
+    public boolean broadcastRankMessage(){
+        return config.getBoolean("settings.broadcast_rank_message");
+    }
+
     public String getRankupBroadcastMessage(Player player, Rank rank){
         return config.getString("lang.rankup_broadcast").replaceAll("%rank%", rank.getDisplay()).replaceAll("%player%", player.getName());
     }
 
     public String getLastRankMessage() {
         return config.getString("lang.last_rankup");
+    }
+
+    public String getRankDownError() {
+        return config.getString("lang.rankdown_error");
+    }
+
+    public String getRankDownSuccess(Rank rank){
+        return config.getString("lang.rankdown_success").replaceAll("%rank%", rank.getDisplay());
+    }
+
+    public String getRankupPermission(){
+        return config.getString("settings.permissions.rankup");
+    }
+
+    public String getRankDownPermission(){
+        return config.getString("settings.permissions.rankdown");
     }
 }

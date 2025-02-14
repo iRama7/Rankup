@@ -19,12 +19,22 @@ public abstract class Database {
         this.main = main;
     }
 
-    public void updatePlayer(Player player, Rank rank) throws SQLException {
+    public void addPlayer(Player player, Rank rank) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ranks (player, rank_index) VALUES (?, ?)")) {
             preparedStatement.setString(1, player.getName());
             preparedStatement.setInt(2, rank.getIndex());
             preparedStatement.executeUpdate();
         }
+    }
+
+    public void updatePlayer(Player player, Rank rank) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("UPDATE ranks SET rank_index = ? WHERE player = ?");
+        statement.setInt(1, rank.getIndex());
+        statement.setString(2, player.getName());
+
+        statement.executeUpdate();
+
+        statement.close();
     }
 
     public void closeConnection() throws SQLException {

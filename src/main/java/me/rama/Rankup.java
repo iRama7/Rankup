@@ -24,8 +24,6 @@ import static org.bukkit.Bukkit.getConsoleSender;
 
 public final class Rankup extends JavaPlugin {
 
-    private Rankup main;
-
     private List<Rank> ranks = new ArrayList<>();
     private Database database;
 
@@ -34,7 +32,6 @@ public final class Rankup extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        main = this;
 
         this.saveDefaultConfig();
         settings = new Config(this);
@@ -225,6 +222,14 @@ public final class Rankup extends JavaPlugin {
         Rank rank = getDatabase().getRank(player);
 
         return ranks.get(rank.getIndex() + 1);
+    }
+
+    public Rank getPrevRank(Player player) throws SQLException {
+
+        Rank rank = getDatabase().getRank(player);
+
+        return ranks.get(rank.getIndex() - 1);
+
     }
 
 }
