@@ -15,24 +15,14 @@ public class PlaceholderRequirement extends Requirement{
         String translatedVariable = PlaceholderAPI.setPlaceholders(player, variable);
 
         switch (return_type){
-            case "integer":
+            case "money", "playtime":
 
                 try {
                     int variableInt = Integer.parseInt(translatedVariable);
-                    String[] split = requirement.split(";");
 
-                    if (split.length != 2) return false;
+                    int value = Integer.parseInt(requirement);
 
-                    String operator = split[0];
-                    int value = Integer.parseInt(split[1]);
-
-                    return switch (operator) {
-                        case "<" -> variableInt < value;
-                        case "<=" -> variableInt <= value;
-                        case ">" -> variableInt > value;
-                        case ">=" -> variableInt >= value;
-                        default -> false;
-                    };
+                    return variableInt >= value;
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                     return false;
@@ -40,6 +30,45 @@ public class PlaceholderRequirement extends Requirement{
 
             default:
                 return false;
+
+        }
+
+    }
+
+    public String getPlayerNeed(Player player){
+
+        String message;
+        String translatedVariable = PlaceholderAPI.setPlaceholders(player, variable);
+
+        switch(return_type){
+            case "money":
+
+                message = main.getSettings().getMoneyNeed();
+                int playerMoney = Integer.parseInt(translatedVariable);
+                int moneyRequirement = Integer.parseInt(requirement);
+
+                return message.replaceAll("%money%", String.valueOf(moneyRequirement - playerMoney));
+
+            case "playtime":
+
+                message = main.getSettings().getPlaytimeNeed();
+                int playerTime = Integer.parseInt(translatedVariable);
+                int timeRequirement = Integer.parseInt(requirement);
+                int secondsNeeded = timeRequirement - playerTime;
+
+                int days = secondsNeeded / 86400;
+                secondsNeeded -= days * 86400;
+                int hours = secondsNeeded / 3600;
+                secondsNeeded -= hours * 3600;
+                int minutes = secondsNeeded / 60;
+                secondsNeeded -= minutes * 60;
+
+                return message.replaceAll("%d%", String.valueOf(days))
+                        .replaceAll("%h%", String.valueOf(hours))
+                        .replaceAll("%m%", String.valueOf(minutes))
+                        .replaceAll("%s%", String.valueOf(secondsNeeded));
+            default:
+                return null;
 
         }
 

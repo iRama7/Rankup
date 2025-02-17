@@ -20,4 +20,6 @@ public abstract class Requirement {
 
     public abstract boolean eval(Player player);
 
+    public abstract String getPlayerNeed(Player player);
+
 }

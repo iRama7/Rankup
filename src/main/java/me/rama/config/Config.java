@@ -73,9 +73,6 @@ public class Config {
         return config.getString("lang.error_message");
     }
 
-    public String getRankupFailMessage(){
-        return config.getString("lang.rankup_fail");
-    }
 
     public String getRankupSuccessMessage(Rank rank){
         return config.getString("lang.rankup_success").replaceAll("%rank%", rank.getDisplay());
@@ -107,5 +104,17 @@ public class Config {
 
     public String getRankDownPermission(){
         return config.getString("settings.permissions.rankdown");
+    }
+
+    public String getMoneyNeed(){
+        return config.getString("lang.requirements.money_need");
+    }
+
+    public String getPlaytimeNeed(){
+        return config.getString("lang.requirements.playtime_need");
+    }
+
+    public List<String> getRankupFail(){
+        return config.getStringList("lang.requirements.message");
     }
 }

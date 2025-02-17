@@ -2,6 +2,7 @@ package me.rama.commands;
 
 import me.rama.Rankup;
 import me.rama.ranks.Rank;
+import me.rama.ranks.requirements.Requirement;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -71,7 +72,18 @@ public class RankupCommand implements TabExecutor {
                         }
 
                     } else {
-                        player.sendMessage(main.colorized(main.getSettings().getRankupFailMessage()));
+                        for(String m : main.getSettings().getRankupFail()){
+                            if(m.contains("%requirements%")){
+                                for(Requirement r : next_rank.getRequirements()){
+                                    if(!r.eval(player)) {
+                                        player.sendMessage(main.colorized(r.getPlayerNeed(player)));
+                                    }
+                                }
+                            }else{
+                                player.sendMessage(main.colorized(m));
+                            }
+                        }
+
                     }
 
                 }

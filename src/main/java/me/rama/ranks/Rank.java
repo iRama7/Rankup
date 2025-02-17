@@ -70,4 +70,8 @@ public class Rank {
     public String getDisplay() {
         return display;
     }
+
+    public List<Requirement> getRequirements() {
+        return requirements;
+    }
 }

@@ -8,12 +8,17 @@ settings:
 
 lang:
   error_message: "&cAn error has occurred, please contact the administrators."
-  rankup_fail: "&cCould not rankup, you are missing the requirements."
   rankup_success: "&aYou have ranked up to rank &r%rank% &asuccessfully."
   rankup_broadcast: "&ePlayer &f%player% &eranked up to rank &f%rank% &esuccessfully."
   last_rankup: "&eYou are already at the last rank!"
   rankdown_error: "&cYou can't rankdown anymore!"
   rankdown_success: "&eYou have ranked down to rank &r%rank% &asuccessfully."
+  requirements:
+    playtime_need: "&cYou need %d% days, %h% hours, %m%, %s% seconds of playtime to be able to rankup."
+    money_need: "&cYou need %money%$ to be able to rankup."
+    message:
+      - "&cCould not rankup, you are missing the following requirements:"
+      - "%requirements%"
 
 ranks:
   0: #Default rank
@@ -23,8 +28,13 @@ ranks:
       1:
         type: placeholder
         variable: ""
-        return: integer
-        requirement: ">=;2000" #<, <=, >, >=
+        return: money
+        requirement: "2000" #<, <=, >, >=
+      2:
+        type: placeholder
+        variable: ""
+        return: playtime
+        requirement: "2000" #(seconds) #<, <=, >, >=
     up_commands:
       - "CONSOLE;lp user $player parent add vip"
     down_commands:
