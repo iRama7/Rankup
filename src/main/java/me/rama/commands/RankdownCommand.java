@@ -49,7 +49,7 @@ public class RankdownCommand implements CommandExecutor {
 
                 //Execute rank down if not null
                 if(prev_rank != null){
-                    prev_rank.rankdown(player);
+                    player_rank.rankdown(player);
 
                     try {
                         main.getDatabase().updatePlayer(player, prev_rank); //Update database

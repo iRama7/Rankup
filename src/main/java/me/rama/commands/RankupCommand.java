@@ -80,7 +80,7 @@ public class RankupCommand implements TabExecutor {
                                     }
                                 }
                             }else{
-                                player.sendMessage(main.colorized(m));
+                                player.sendMessage(main.colorized(m.replaceAll("%rank%", next_rank.getDisplay())));
                             }
                         }
 

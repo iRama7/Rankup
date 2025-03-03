@@ -17,7 +17,7 @@ lang:
     playtime_need: "&cYou need %d% days, %h% hours, %m%, %s% seconds of playtime to be able to rankup."
     money_need: "&cYou need %money%$ to be able to rankup."
     message:
-      - "&cCould not rankup, you are missing the following requirements:"
+      - "&cCould not rankup to rank %rank%, you are missing the following requirements:"
       - "%requirements%"
 
 ranks:
